@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+ 
+    <meta property="og:type" content=""/>
+    <title>경기도 콘텐츠 진흥원</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel = "stylesheet" href="/static/MonthPicker.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script> 
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <script src="http://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script src="/static/naver.js"></script>
+    <script src="/static/macy.js"></script>
+    <script src="/static/excelexport.js"></script>
+    <script src="/static/jquery.mswitch.js"></script>
+    <link href="/static/jquery.mswitch.css" rel="stylesheet">
+    
+
+
+
+    <script
+  src="https://code.jquery.com/jquery-1.12.4.js"
+  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+  <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+  <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=422629e7f2ced5e998ddaeec8ec7d7af&libraries=services"></script>
+  <script src="/static/MonthPicker.js"></script>
+    <script src="/static/ion.rangeSlider.js"></script>
+    <link rel="stylesheet" href="/static/ion.rangeSlider.css">
+    <link rel="stylesheet" href="/static/ion.rangeSlider.skinFlat.css">
+    <link rel="stylesheet" href="/static/fancySelect.css">
+    <script src="/static/fancySelect.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="https://www.youtube.com/player_api"></script>
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css">
+    <script src="/static/jquery.mtz.monthpicker.js"></script>
+
+    <script>
+        var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/player_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+   $( document ).ajaxSend(function( event, xhr, settings ) {
+    if (settings.type == 'POST' || settings.type == 'PUT' || settings.type == 'DELETE') {
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+            // Only send the token to relative URLs i.e. locally.
+            xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+        }
+    }
+});
+  </script>
+  <style>
+        @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+    body        { font-family: 'Noto Sans KR', sans-serif; }
+    </style>
+  </head>
+  <body style="width:100%; min-width: 1224px; ">
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+  <style>
+    #header>ul>a>li{
+      font-weight: normal; 
+    /* //  color: #a0a3bc; */
+    }
+    .menu_on{
+      color: #1a2f53!important;
+      font-weight: bold!important;
+    }
+    .hidden{
+      display: none!important;
+    }
+    a{
+      color: inherit;
+      text-decoration: none;
+    }
+    ul{
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
+    margin: 0px;
+    }
+    li{
+      list-style: none;
+    }
+    #application_header_bottom>ul>li{
+      cursor: pointer;
+    }
+    ul{
+      padding-left: 0px;
+    }
+    .more{
+      cursor: pointer;
+    }
+    .hr{
+          clear: both;
+        margin-top: 48px;
+        width: 1016px;
+        height: 1px;
+        border-bottom:1px solid rgba(206, 212, 218, 0.5);
+    }
+   
+    .filter{
+      margin-right: 6px;
+cursor: pointer;
+border-radius: 100px;
+padding-left: 26px;
+padding-right: 26px;
+padding-top:11px;
+padding-bottom:11px;
+display: inline-block;
+background-color: #f5f8ff;
+height: 18px;
+line-height: 18px;
+opacity: 0.7;
+font-size: 14px;
+letter-spacing: -0.1px;
+text-align: center;
+color: #1a2a53;
+margin-bottom:12px;
+    }
+    .bold{
+      font-weight: bold;
+    }
+
+.page_title{
+    opacity: 0.8;  
+    font-size: 20px;
+    font-weight: bold;  
+    color: #1a2f53;
+    margin-top:40px;
+
+}
+
+.app_btn{
+    width: 124px;
+    height: 38px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    border: solid 1px #1b66f4;
+    font-weight: normal;
+    line-height:40px;
+    letter-spacing: normal;
+    text-align: center;
+    color: #1b66f4;
+    margin-top: 42px;
+    margin-left: 43px;
+    cursor: pointer;
+}
+
+.f0{
+  font-size: 32px;
+}
+.f1{
+  font-size: 24px;
+  }
+  .f2{
+    font-size: 17px
+  }
+  .f3{
+    font-size: 16px;
+  }
+  .f4{
+    font-size: 14px;
+  }
+  .f5{
+    font-size: 12px;
+  }
+  .f6{
+    font-size: 10px;
+  }
+.b1{
+  color:rgba(26,42,83,1)
+}
+.b2{
+  color:rgba(26,42,83,0.8)
+}
+.b3{
+  color:rgba(26,42,83,0.5)
+}
+.pr1{
+  color:rgba(27,73, 244, 1 )
+}
+.pr2{
+  color:rgba(27,73, 244, 0.7 )
+}
+.se{
+  color:#F54B94
+}
+.l1{
+  color: #F1F6FF
+}
+.l2{
+  color: #C1D1F7
+}
+.l3{
+  color: rgba(193,209,247,0.8 );
+}
+.base1{
+  color:#F5F8FF
+}
+.base2{
+  color:#E7EDFC
+}
+.g1{
+  color:#A0A3BC
+}
+.gr2{
+  color:#4F5478
+}
+.gr3{
+  color:#CAD1DD
+}
+.err{
+  color:#D0021B
+}
+
+
+
+.gnb_space{width:100%}
+.gnb_conn{width:1224px;}
+.my_profile{margin:10px;}
+.jumbotrn_img{width:100%}
+.jb_text{font-size: 32px;}
+.jb_sub_text{font-size :27px;}
+.login_btn{position: relative;}
+.sc_title{}
+.sb_card{}
+.show{display:block}
+.row{width:100%}
+.content{
+  width:1224px;
+}
+.channel_bg{
+  background: #A0A3BC
+}
+.clip{
+  -ms-block-progression: bt
+}
+.rgt_nav{-webkit-mask-attachment:10px}
+
+.comp{font-size: 10px;}
+
+
+.percent{
+     font-family: Rubik;
+  font-size: 18px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.92;
+  letter-spacing: normal;
+  text-align: right;
+  color: #1a2a53;
+  position: absolute;
+  top: 53px;
+  right: 56px;
+    height: 22px;
+}
+
+  </style>
+</html>
