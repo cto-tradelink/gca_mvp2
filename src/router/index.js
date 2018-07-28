@@ -81,7 +81,10 @@ import Main from "@/components/Main"
 import ManageChanneling from "@/components/mypage/my_channel/ManageChannelIng"
 import ManageChannelint from "@/components/mypage/my_channel/ManageChannelInt"
 import ManageChannelDetail from "@/components/mypage/my_channel/ManageChannelDetail"
+
+
 import Datetime from 'vue-datetime'
+
 // You need a specific loader for CSS files
 import 'vue-datetime/dist/vue-datetime.css'
 
@@ -112,6 +115,8 @@ export default new Router({
     return { x: 0, y: 0 }
   },
   routes: [
+   
+    
     {
       path: '/',
       component: Main

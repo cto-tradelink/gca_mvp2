@@ -445,6 +445,7 @@ export default {
   left:50%;
   margin-left:-282px;
   top:200px;
+  line-height: inherit;
 }
 #logout{
         width: 152px;

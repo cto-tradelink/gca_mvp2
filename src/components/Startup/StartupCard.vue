@@ -1,6 +1,6 @@
 <template>
 
-    <div class="startup_card" :data-id="startup.id">
+    <div v-on:click="detail(startup.id, $event)" class="startup_card" :data-id="startup.id">
         <div class="card_main">
             <div class="card_text_con">
                 <div class="startup_name"><router-link v-bind:to="'/startup/'+startup.id">{{startup.name}}</router-link></div>
@@ -19,74 +19,15 @@
 <script>
 export default {
     props:["startup"],
+    methods:{
+        detail:function(startup_id, e){
+            this.$router.push("/startup/"+startup_id)
+        },
+    },
     mounted:function(){ 
             var vue_obj = this
-               $(document).ready(function(){
-                   $(document).on("click",".startup_card", function(){
-                       vue_obj.$router.push("/startup/"+$(this).attr("data-id"))
-                   })
-               })
     },
-       methods:{
-            // follow:function(e){
-            //     var vue_obj = this
-            //     // 스타트업 아이디
-            //     console.log(e)
-            //     console.log( $(e.path[1]))
-            //      if(localStorage.getItem("user") == "u" ){
-            //          var data = {
-            //              "val": $(e.path[1]).attr("data-id"),
-            //              "id":localStorage.getItem("id")
-            //          }
-            //         if($(e.path[1]).css("color") == "rgb(0, 0, 0)"){
-            //          $.ajax({
-            //             url:`${this.baseURI}/vue_add_interest_st/`,
-            //             method:"POST",
-            //             data:data,
-            //             success:function(res){console.log(res)
-            //                 if(res=="ok-add"){alert("관심 목록에 추가되었습니다.")
-            //                  $(e.path[0]).css("color","#ff0000")
-            //                 }else{
-            //                     alert("관심목록에서 삭제되었습니다.")
-            //                     $(e.path[0]).css("color","#000000") 
-            //                 }
-            //             },
-            //             error:function(e){console.log(e)
-            //             }
-            //          })
-            //         }
-            //         else{
-            //             var result = confirm("관심 목록에서 제외하시겠습니까?")
-            //             if(result == true){
-            //                   $.ajax({
-            //             url:`${this.baseURI}/vue_add_interest_st/`,
-            //             method:"POST",
-            //             data:data,
-            //             success:function(res){console.log(res)
-            //                 if(res=="ok-add"){alert("관심 목록에 추가되었습니다.")
-            //                  $(e.path[0]).css("color","#ff0000")
-            //                 }else{
-            //                     $(e.path[0]).css("color","#000000") 
-            //                     vue_obj.$router.go()  
-            //                 }
-            //             },
-            //             error:function(e){console.log(e)
-            //             }
-            //          })
-            //             }
-            //         }
-
-                   
-            //      }else{
-            //          if(localStorage.getItem("user") == "m" || localStorage.getItem("user") == "ma"  ){
-            //              alert("매니저나 기관관리자는 스타트업을 팔로우하실수 없습니다.")
-            //          }else{
-            //              alert("로그인을 진행해주세요.")
-            //          }
-            //      }
-                       
-            // }
-    }
+  
 }
 </script>
 

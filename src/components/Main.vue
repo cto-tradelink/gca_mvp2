@@ -203,7 +203,9 @@ components:{
 
     $(document).ready(function(){
         check_fav(vue_obj)
-        
+        $(document).on('click',"#reg_btn",function(){
+            vue_obj.$router.push("/login")
+        })
         $(document).on("click","#add_filter_btn", function(){
             //비 로그인 유저 는 로그인 알람
             if(localStorage.getItem("user") == "u")
@@ -228,13 +230,15 @@ components:{
          $(document).on("click",".clip_seg_main", function(){
                     vue_obj.$router.push($(this).attr("data-url"))
                 })
-
-          $(document).off("click",".heart")
+        console.log("function heart")
+          //$(document).off("click",".heart")
            $(document).on("click",".heart", function(e){
                console.log("heh")
                 var target = this
-                 e.preventDefault();
-                 e.stopPropagation()
+                e.preventDefault();
+                e.stopPropagation()
+                console.log("하트 클릭 이벤트")
+                console.log()
                 if(localStorage.getItem("user")!="u"){
                    if( localStorage.getItem("user") == "m" ||localStorage.getItem("user")=="ma"){ alert("관심담기를 할수 없는 계정입니다."); return false; }
                     else alert("로그인을 해주세요."); return false;    
