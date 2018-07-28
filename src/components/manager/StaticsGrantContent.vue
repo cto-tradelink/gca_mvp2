@@ -130,37 +130,8 @@ import axios from "axios"
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import { setTimeout } from 'timers';
+import * as utils from "../utils/utils"
 
-
-function make_pie_graph(target, arr,arr2){
-        $(target).empty()
-        var group = d3.select(target)
-                      .attrs({ width: 300, height: 300 })
-                      .append('g')
-                      .attr('transform', 'translate(100, 100)');
-        var data = arr;
-        var pieSegments = d3.pie()(data);
-        var arcGenerator = d3.arc()
-                             .innerRadius(70)
-                             .outerRadius(100)
-                             .startAngle(function (d) { return d.startAngle; })
-                             .endAngle(function (d) { return d.endAngle; });
-        var colors = d3.scaleOrdinal(d3.schemeCategory10);
-        group.selectAll('path')
-             .data(pieSegments)
-             .enter()
-             .append('path')
-             .attrs({ d: arcGenerator, stroke: 'white',
-                      'stroke-width': 0, fill: function (d, i) {
-                          return colors(i);
-                      },
-             });
-             $(target).parent().parent().find(".column").find("ul").empty()
-             for(var k=0; k < arr2.length;k++){
-                 var $seg =  "<li><span style='background-color:"+colors(k)+"'></span><span>"+arr2[k]+":"+arr[k]+"</span></li>"
-                  $(target).parent().parent().find(".column").find("ul").append($seg)
-             }
-}
 function format_date(date) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -486,13 +457,13 @@ $(document).ready(function(){
               
                 init_zoomable_line()
                 var result = dict_sort(vue_obj.base_info.all_local_tag)
-                make_pie_graph("#pie_0", result.value , result.key)
+                utils.make_pie_graph("#pie_0", result.value , result.key)
                 var result2 = dict_sort(vue_obj.base_info.all_kind_tag)
-                make_pie_graph("#pie_1", result2.value , result2.key)
+                utils.make_pie_graph("#pie_1", result2.value , result2.key)
                 var result3 = dict_sort(vue_obj.base_info.all_em_tag)
-                make_pie_graph("#pie_2", result3.value , result3.key)
+                utils.make_pie_graph("#pie_2", result3.value , result3.key)
                 var result4 = dict_sort(vue_obj.base_info.all_tag_tag)
-                make_pie_graph("#pie_3", result4.value , result4.key)
+                utils.make_pie_graph("#pie_3", result4.value , result4.key)
                 $(".list_btn").removeClass("bold")
                 $(".list_btn:eq(0)").addClass("bold")
                 
@@ -520,13 +491,13 @@ $(document).ready(function(){
                
                 update_zoomable_line()
                 var result = dict_sort(vue_obj.base_info.all_local_tag)
-                make_pie_graph("#pie_0", result.value , result.key)
+                utils.make_pie_graph("#pie_0", result.value , result.key)
                 var result2 = dict_sort(vue_obj.base_info.all_kind_tag)
-                make_pie_graph("#pie_1", result2.value , result2.key)
+                utils.make_pie_graph("#pie_1", result2.value , result2.key)
                 var result3 = dict_sort(vue_obj.base_info.all_em_tag)
-                make_pie_graph("#pie_2", result3.value , result3.key)
+                utils.make_pie_graph("#pie_2", result3.value , result3.key)
                 var result4 = dict_sort(vue_obj.base_info.all_tag_tag)
-                make_pie_graph("#pie_3", result4.value , result4.key)
+                utils.make_pie_graph("#pie_3", result4.value , result4.key)
                 $(".list_btn").removeClass("bold")
                 $(".list_btn:eq(0)").addClass("bold")
 
@@ -548,50 +519,50 @@ $(document).ready(function(){
                 vue_obj.pre_entry = vue_obj.base_info.all_startup_list
                 vue_obj.entry = vue_obj.base_info.all_startup_list.slice(0,10)
                 var result = dict_sort(vue_obj.base_info.all_local_tag)
-                make_pie_graph("#pie_0", result.value , result.key)
+                utils.make_pie_graph("#pie_0", result.value , result.key)
                 var result2 = dict_sort(vue_obj.base_info.all_kind_tag)
-                make_pie_graph("#pie_1", result2.value , result2.key)
+                utils.make_pie_graph("#pie_1", result2.value , result2.key)
                 var result3 = dict_sort(vue_obj.base_info.all_em_tag)
-                make_pie_graph("#pie_2", result3.value , result3.key)
+                utils.make_pie_graph("#pie_2", result3.value , result3.key)
                 var result4 = dict_sort(vue_obj.base_info.all_tag_tag)
-                make_pie_graph("#pie_3", result4.value , result4.key)
+                utils.make_pie_graph("#pie_3", result4.value , result4.key)
         }else 
         if($(this).val()=="1"){
                 vue_obj.pre_entry = vue_obj.base_info.ap_startup_list
                 vue_obj.entry = vue_obj.base_info.ap_startup_list.slice(0,10)
                 var result = dict_sort(vue_obj.base_info.ap_local_tag)
-                make_pie_graph("#pie_0", result.value , result.key)
+                utils.make_pie_graph("#pie_0", result.value , result.key)
                 var result2 = dict_sort(vue_obj.base_info.ap_kind_tag)
-                make_pie_graph("#pie_1", result2.value , result2.key)
+                utils.make_pie_graph("#pie_1", result2.value , result2.key)
                 var result3 = dict_sort(vue_obj.base_info.ap_em_tag)
-                make_pie_graph("#pie_2", result3.value , result3.key)
+                utils.make_pie_graph("#pie_2", result3.value , result3.key)
                 var result4 = dict_sort(vue_obj.base_info.ap_tag_tag)
-                make_pie_graph("#pie_3", result4.value , result4.key)
+                utils.make_pie_graph("#pie_3", result4.value , result4.key)
         }else 
         if($(this).val()=="2"){
                 vue_obj.pre_entry = vue_obj.base_info.hit_startup_list
                 vue_obj.entry = vue_obj.base_info.hit_startup_list.slice(0,10)
                 var result = dict_sort(vue_obj.base_info.hit_local_tag)
-                make_pie_graph("#pie_0", result.value , result.key)
+                utils.make_pie_graph("#pie_0", result.value , result.key)
                 var result2 = dict_sort(vue_obj.base_info.hit_kind_tag)
-                make_pie_graph("#pie_1", result2.value , result2.key)
+                utils.make_pie_graph("#pie_1", result2.value , result2.key)
                 var result3 = dict_sort(vue_obj.base_info.hit_em_tag)
-                make_pie_graph("#pie_2", result3.value , result3.key)
+                utils.make_pie_graph("#pie_2", result3.value , result3.key)
                 var result4 = dict_sort(vue_obj.base_info.hit_tag_tag)
-                make_pie_graph("#pie_3", result4.value , result4.key)
+                utils.make_pie_graph("#pie_3", result4.value , result4.key)
         }
         else 
         if($(this).val()=="3"){
                 vue_obj.pre_entry = vue_obj.base_info.aw_startup_list
                 vue_obj.entry = vue_obj.base_info.aw_startup_list.slice(0,10)                
                 var result = dict_sort(vue_obj.base_info.aw_local_tag)
-                make_pie_graph("#pie_0", result.value , result.key)
+                utils.make_pie_graph("#pie_0", result.value , result.key)
                 var result2 = dict_sort(vue_obj.base_info.aw_kind_tag)
-                make_pie_graph("#pie_1", result2.value , result2.key)
+                utils.make_pie_graph("#pie_1", result2.value , result2.key)
                 var result3 = dict_sort(vue_obj.base_info.aw_em_tag)
-                make_pie_graph("#pie_2", result3.value , result3.key)
+                utils.make_pie_graph("#pie_2", result3.value , result3.key)
                 var result4 = dict_sort(vue_obj.base_info.aw_tag_tag)
-                make_pie_graph("#pie_3", result4.value , result4.key)
+                utils.make_pie_graph("#pie_3", result4.value , result4.key)
         }
         vue_obj.list_nav=[]
         for(var k=1; k <= Math.ceil(vue_obj.pre_entry.length/10); k++){vue_obj.list_nav.push(k)}
@@ -647,13 +618,13 @@ $(document).ready(function(){
                 for(var k=1; k <= Math.ceil(vue_obj.pre_entry.length/10); k++){vue_obj.list_nav.push(k)}
                 update_zoomable_line()
                 var result = dict_sort(vue_obj.base_info.all_local_tag)
-                make_pie_graph("#pie_0", result.value , result.key)
+                utils.make_pie_graph("#pie_0", result.value , result.key)
                 var result2 = dict_sort(vue_obj.base_info.all_kind_tag)
-                make_pie_graph("#pie_1", result2.value , result2.key)
+                utils.make_pie_graph("#pie_1", result2.value , result2.key)
                 var result3 = dict_sort(vue_obj.base_info.all_em_tag)
-                make_pie_graph("#pie_2", result3.value , result3.key)
+                utils.make_pie_graph("#pie_2", result3.value , result3.key)
                 var result4 = dict_sort(vue_obj.base_info.all_tag_tag)
-                make_pie_graph("#pie_3", result4.value , result4.key)
+                utils.make_pie_graph("#pie_3", result4.value , result4.key)
                 $(".list_btn").removeClass("bold")
                 $(".list_btn:eq(0)").addClass("bold")
 
@@ -678,13 +649,13 @@ $(document).off("click","#top_banner>div:eq(1)")
                 for(var k=1; k <= Math.ceil(vue_obj.pre_entry.length/10); k++){vue_obj.list_nav.push(k)}
                 update_zoomable_line()
                 var result = dict_sort(vue_obj.base_info.all_local_tag)
-                make_pie_graph("#pie_0", result.value , result.key)
+                utils.make_pie_graph("#pie_0", result.value , result.key)
                 var result2 = dict_sort(vue_obj.base_info.all_kind_tag)
-                make_pie_graph("#pie_1", result2.value , result2.key)
+                utils.make_pie_graph("#pie_1", result2.value , result2.key)
                 var result3 = dict_sort(vue_obj.base_info.all_em_tag)
-                make_pie_graph("#pie_2", result3.value , result3.key)
+                utils.make_pie_graph("#pie_2", result3.value , result3.key)
                 var result4 = dict_sort(vue_obj.base_info.all_tag_tag)
-                make_pie_graph("#pie_3", result4.value , result4.key)
+                utils.make_pie_graph("#pie_3", result4.value , result4.key)
                 $(".list_btn").removeClass("bold")
                 $(".list_btn:eq(0)").addClass("bold")
                 $("#select_zone>.basic option[value='all']").prop("selected", true)
@@ -706,13 +677,13 @@ $(document).off("click","#top_banner>div:eq(1)")
                 for(var k=1; k <= Math.ceil(vue_obj.pre_entry.length/10); k++){vue_obj.list_nav.push(k)}
                 update_zoomable_line()
                 var result = dict_sort(vue_obj.base_info.all_local_tag)
-                make_pie_graph("#pie_0", result.value , result.key)
+                utils.make_pie_graph("#pie_0", result.value , result.key)
                 var result2 = dict_sort(vue_obj.base_info.all_kind_tag)
-                make_pie_graph("#pie_1", result2.value , result2.key)
+                utils.make_pie_graph("#pie_1", result2.value , result2.key)
                 var result3 = dict_sort(vue_obj.base_info.all_em_tag)
-                make_pie_graph("#pie_2", result3.value , result3.key)
+                utils.make_pie_graph("#pie_2", result3.value , result3.key)
                 var result4 = dict_sort(vue_obj.base_info.all_tag_tag)
-                make_pie_graph("#pie_3", result4.value , result4.key)
+                utils.make_pie_graph("#pie_3", result4.value , result4.key)
                 $(".list_btn").removeClass("bold")
                 $(".list_btn:eq(0)").addClass("bold")
                 $("#select_zone>.basic option[value='all']").prop("selected", true)
