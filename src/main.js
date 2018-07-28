@@ -12,6 +12,8 @@ import 'swiper/dist/css/swiper.css'
 Vue.use(VueAwesomeSwiper, /* { default global options } */)
 
 Vue.config.productionTip = false
+Vue.config.silent = true
+
 Vue.prototype.$http=axios
 Vue.prototype.$http.defaults.xsrfCookieName = 'csrftoken';
 Vue.prototype.$http.defaults.xsrfHeaderName = 'X-CSRFToken';

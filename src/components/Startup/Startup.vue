@@ -16,6 +16,8 @@
 import Header from "../common/Header.vue"
 import StartupHead from "./StartupHead.vue"
 import StartupBody from "./StartupBody.vue"
+import {test , HeartAdd} from "@/components/utils/utils"
+var heart = new HeartAdd()
 
 export default {
     components:{

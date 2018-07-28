@@ -117,7 +117,7 @@
             <div class="info_seg"><img src="/static/img/Mail2.png"><span>대표메일</span><input placeholder="대표 메일을 입력하세요" class="input_normal"></div>
             <div class="info_seg"><img src="/static/img/Phone.png"><span>전화번호</span><input placeholder="000-000-0000" class="input_normal"></div>
             <div class="info_seg"><img src="/static/img/Work.png"><span>사업분야</span><input class="input_normal" placeholder="사업분야를 입력하세요"></div>
-            <div class="info_seg"><img src="/static/img/Tag.png"><span>관련태그</span><input placeholder="#해시태그 #입력 #해주세요 #띄어쓰기로구분" class="input_normal"></div>
+            <div class="info_seg"><img src="/static/img/Tag.png"><span>관련태그</span><input v-on:keyup="make_hash_string($event)" placeholder="#해시태그 #입력 #해주세요 #띄어쓰기로구분" class="input_normal"></div>
         </div>
         <div class="info_con">
             <div class="info_ttl">소재지</div>
@@ -171,6 +171,7 @@
     </div>
 </template>
 <script>
+import * as utils from "../utils/utils"
    var mapContainer  
      var  mapOption
     //지도를 미리 생성
@@ -211,6 +212,10 @@ export default {
         }
     },
     methods:{
+        make_hash_string:function(e){
+            console.log("asdfasd")
+            utils.make_hash_string(e)
+        },
 
             modify_local:function(e){
                  if($(e.path[0]).text()=="수정"){

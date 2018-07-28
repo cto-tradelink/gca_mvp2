@@ -107,6 +107,7 @@
            </div>
         </div>
         <div id="footer"></div>
+        <test2></test2>
     </div>
 </template>
 
@@ -115,7 +116,11 @@ import Header from "./common/Header.vue"
 import CardWithPoster from './common/CardWithPoster.vue';
 import CardWithoutPoster from './common/CardWithoutPoster.vue';
 import StartupCard from "./Startup/StartupCard.vue"
-import test2 from "@/components/utils/test.js"
+import  * as utils  from "./utils/utils"
+
+var heart = new utils.HeartAdd()
+
+    heart.action_heart();
 var masonry;
 export default {
 components:{
@@ -124,11 +129,12 @@ components:{
     methods:{
         test(){
             console.log("dhdhdh")      
-            test2.test_js()
         }
     },
 
     data:function(){
+
+        
         return{
             startup_list :[],
             grant_list:[],
@@ -157,7 +163,7 @@ components:{
         
     },
     mounted:function(){
-       
+        console.log("mounted:function")
        
        
     var vue_obj = this
@@ -220,9 +226,6 @@ components:{
                 }
             }
         })
-
-        
-
            vue_obj.clip_on = vue_obj.clip.slice()
            vue_obj.course_on = vue_obj.course.slice()
            vue_obj.path_on = vue_obj.path.slice()
@@ -231,61 +234,70 @@ components:{
                     vue_obj.$router.push($(this).attr("data-url"))
                 })
         console.log("function heart")
-          //$(document).off("click",".heart")
-           $(document).on("click",".heart", function(e){
-               console.log("heh")
-                var target = this
-                e.preventDefault();
-                e.stopPropagation()
-                console.log("하트 클릭 이벤트")
-                console.log()
-                if(localStorage.getItem("user")!="u"){
-                   if( localStorage.getItem("user") == "m" ||localStorage.getItem("user")=="ma"){ alert("관심담기를 할수 없는 계정입니다."); return false; }
-                    else alert("로그인을 해주세요."); return false;    
-                }
-                var t = $(this).attr("data-target")
-                if( t == "path")  {var url = "/toggle_int_path/"; var text="패스";}
-                else if(t == "course") {var url = "/toggle_int_course/"; var text="코스";}
-                else if(t == "clip") {var url = "/toggle_int_clip/"; var text="강의";}
-                else if(t == "startup") {var url = "/vue_toggle_interest_st/"; var text="스타트업";}
-                else if(t == "sp") {var url = "/vue_toggle_interest_sb/"; var text="지우너사업";}
+ 
+      
+
+
+        $(document).off("click",".heart")
+        $(document).on("click",".heart", function(){
+            console.log("heart down")
+            heart.action_heart()
+            }
+            )
+
+
+           
+        //    $(document).on("click",".heart", function(e){
+        //        console.log("heh")
+        //         var target = this
+        //         e.preventDefault();
+        //         e.stopPropagation()
+        //         console.log("하트 클릭 이벤트")
+        //         console.log()
+        //         if(localStorage.getItem("user")!="u"){
+        //            if( localStorage.getItem("user") == "m" ||localStorage.getItem("user")=="ma"){ alert("관심담기를 할수 없는 계정입니다."); return false; }
+        //             else alert("로그인을 해주세요."); return false;    
+        //         }
+        //         var t = $(this).attr("data-target")
+        //         if( t == "path")  {var url = "/toggle_int_path/"; var text="패스";}
+        //         else if(t == "course") {var url = "/toggle_int_course/"; var text="코스";}
+        //         else if(t == "clip") {var url = "/toggle_int_clip/"; var text="강의";}
+        //         else if(t == "startup") {var url = "/vue_toggle_interest_st/"; var text="스타트업";}
+        //         else if(t == "sp") {var url = "/vue_toggle_interest_sb/"; var text="지우너사업";}
                 
-                if($(this).find("img").attr("src").indexOf("_p") != -1){
-                    if(confirm("관심 "+text+"에서 삭제하시겠습니까?")){
-                        $.ajax({
-                            url:vue_obj.baseURI+url,
-                            type:"post", 
-                            data:{
-                                "id":localStorage.getItem("id"),
-                                "val":$(target).attr("data-id")
-                            },
-                            success:function(res){
-                                alert("성공적으로 삭제 되었습니다.")
-                                $(target).find("img").attr("src","/static/img/like_d.png")
+        //         if($(this).find("img").attr("src").indexOf("_p") != -1){
+        //             if(confirm("관심 "+text+"에서 삭제하시겠습니까?")){
+        //                 $.ajax({
+        //                     url:vue_obj.baseURI+url,
+        //                     type:"post", 
+        //                     data:{
+        //                         "id":localStorage.getItem("id"),
+        //                         "val":$(target).attr("data-id")
+        //                     },
+        //                     success:function(res){
+        //                         alert("성공적으로 삭제 되었습니다.")
+        //                         $(target).find("img").attr("src","/static/img/like_d.png")
                                                              
-                            }
-                        })
-                    }
-                    }
-                    else{
-                        $.ajax({
-                            url:vue_obj.baseURI+url,
-                            type:"post", 
-                            data:{
-                                "id":localStorage.getItem("id"),
-                                "val":$(target).attr("data-id")
-                            },
-                            success:function(res){
-                                alert("성공적으로 등록 되었습니다.")
-                                 $(target).find("img").attr("src","/static/img/like_p.png")
+        //                     }
+        //                 })
+        //             }
+        //             }
+        //             else{
+        //                 $.ajax({
+        //                     url:vue_obj.baseURI+url,
+        //                     type:"post", 
+        //                     data:{
+        //                         "id":localStorage.getItem("id"),
+        //                         "val":$(target).attr("data-id")
+        //                     },
+        //                     success:function(res){
+        //                         alert("성공적으로 등록 되었습니다.")
+        //                          $(target).find("img").attr("src","/static/img/like_p.png")
                               
-                            }
-                        })
-                    }                
-            })
-
-
-         
+        //                     }
+        //                 })
+        //             }                
+        //     })
         $.ajax({
             url:vue_obj.baseURI+ "/get_home_info/",
             type:"post",

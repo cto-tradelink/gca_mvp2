@@ -10,6 +10,8 @@
         </div>
         <div class="startup_card_bottom">
             <div class="tag_con">
+            <!-- <div class="tag_con" v-if=startup.filter.length <= 5 > -->
+            <!-- <div class="tag_con" v-show=startup.filter.length <= 5 > -->
                 <span v-for="t in startup.filter.slice(0,4)" class="tag">{{t}}</span>
             </div>
             <div class="heart_icon heart" data-target="startup" :data-id="startup.id"><img src="/static/img/like_d.png"></div>

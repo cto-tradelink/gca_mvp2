@@ -6,7 +6,7 @@
                 <table>
                     <tr>
                         <td>키워드 입력</td>
-                        <td><input id="tag_input" class="input_normal" v-model="startup.keyword" type="text" placeholder="회사 서비스의 키워드를 입력하세요" value="#"> </td>
+                        <td><input id="tag_input" class="input_normal" v-on:change="make_hash_string($event)" v-model="startup.keyword" type="text" placeholder="회사 서비스의 키워드를 입력하세요" value="#"> </td>
                     </tr>             
                 </table>
             </div>
@@ -98,6 +98,8 @@
 </template>
 
 <script>
+import  * as utils  from "../utils/utils"
+
 export default {
     props:["startup"],
       beforeRouteLeave (to, from, next) {
@@ -121,15 +123,18 @@ export default {
             }
         }
     },
+    methods:{
+       make_hash_string:function(e){
+            utils.make_hash_string(e)
+       },
+      
+    },
     
     mounted:function(){
         var vue_obj = this
         $(document).ready(function(){
 
               $(document).on("keyup","#tag_input", function(){
-                console.log("dd")
-                $(this).val("#"+$(this).val().slice(1,$(this).val().length).replace("##","#").replace(/\s/g,"#"));
-                $(this).val($(this).val().replace("##","#"));
                 
             })
 

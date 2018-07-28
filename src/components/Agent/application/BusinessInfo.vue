@@ -6,7 +6,7 @@
                 <table>
                     <tr>
                         <td>키워드 입력</td>
-                        <td><input class="input_normal" type="text" placeholder="회사의 서비스 키워드를 입력하세요" value="트레이드링크"> </td>
+                        <td><input class="input_normal"  v-on:keyup="make_hash_string($event)"   type="text" placeholder="회사의 서비스 키워드를 입력하세요" value="트레이드링크"> </td>
                     </tr>             
                 </table>
             </div>
@@ -106,6 +106,9 @@
 </template>
 
 <script>
+import * as utils from "../../utils/utils"
+
+
 export default {
     props:["startup"],
     data:function(){
@@ -122,6 +125,11 @@ export default {
                 "local":["경기도기업","경기도 이전 예정","경기도 기업 이용기업","경기도 거주 임직원"],
                 "kind":["개인사업자","법인사업자","경기도기업","MVP 보유기업","상용화 제품 보유기업"]
             }
+        }
+    },
+    methods:{
+        make_hash_string:function(e){
+            utils.make_hash_string(e)
         }
     },
     mounted:function(){
